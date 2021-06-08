@@ -1,0 +1,7 @@
+{
+  "1": {
+    "floorID": 1,
+    "stringID": "floor1",
+    "allLocations": [1, 2, 3, 4]
+  }
+}

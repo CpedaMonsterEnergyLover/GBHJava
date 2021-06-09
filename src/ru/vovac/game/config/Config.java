@@ -1,40 +1,51 @@
 package ru.vovac.game.config;
 
-import com.google.gson.Gson;
-import ru.vovac.game.utils.LangsEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static ru.vovac.game.utils.JSONContentLoader.*;
 
 public class Config {
+    @JsonIgnore
     public static final Path CONFIG_PATH = Path.of("json/config/config.json"); // DO NOT CHANGE THIS!!!
+    @JsonIgnore
     private static Config instance = new Config();
 
-    private String CURRENT_LANG = null;
+    @JsonProperty("CURRENT_LANG")
+    private String CURRENT_LANG = "";
+    @JsonProperty("AVAILABLE_LANGUAGES")
     private List<String> AVAILABLE_LANGUAGES = null;
-    private String JSON_CREATURES = null;
-    private String JSON_EVENTS = null;
-    private String JSON_FLOORS = null;
-    private String JSON_HEROES = null;
-    private String JSON_LOCATIONS = null;
-    private String JSON_RESOURCES = null;
-    private String JSON_ENFILADES = null;
+    @JsonProperty("JSON_CREATURES")
+    private String JSON_CREATURES = "";
+    @JsonProperty("JSON_EVENTS")
+    private String JSON_EVENTS = "";
+    @JsonProperty("JSON_FLOORS")
+    private String JSON_FLOORS = "";
+    @JsonProperty("JSON_HEROES")
+    private String JSON_HEROES = "";
+    @JsonProperty("JSON_LOCATIONS")
+    private String JSON_LOCATIONS = "";
+    @JsonProperty("JSON_RESOURCES")
+    private String JSON_RESOURCES = "";
+    @JsonProperty("JSON_ENFILADES")
+    private String JSON_ENFILADES = "";
 
     public static void load(){
-        Gson gson = new Gson();
-        String json = null;
+        ObjectMapper objectMapper = new ObjectMapper();
         try {
             long ms = System.currentTimeMillis();
-            json = new String(Files.readAllBytes(Paths.get(CONFIG_PATH.toString())));
-            Config.instance = gson.fromJson(json, Config.class);
+            Config.instance = objectMapper.readValue(new File(CONFIG_PATH.toString()), Config.class);
             int len = instance.getColumnCount();
             List<String> missingColumns = instance.getMissingColumns();
             if (missingColumns == null) {
@@ -101,16 +112,16 @@ public class Config {
     }
 
     private static void printConfigLoaded(long ms, int len) {
-        System.out.println(ANSI_GREEN + "[CONFIG LOADER]: Successfully loaded " + len + " strings of config in " + (System.currentTimeMillis() - ms ) + " ms" + ANSI_RESET);
+        System.out.println(ANSI_GREEN + "[CONFIG LOADER] Successfully loaded " + len + " strings of config in " + (System.currentTimeMillis() - ms ) + " ms" + ANSI_RESET);
     }
     private static void printConfigNotLoaded(Exception e) {
-        System.out.println(ANSI_RED + "[CONFIG LOADER]: Couldn't load config... using default options" + ANSI_RESET);
+        System.out.println(ANSI_RED + "[CONFIG LOADER] Couldn't load config... using default options" + ANSI_RESET);
         System.out.println(e.getMessage());
     }
 
     private static void printConfigNotValidated(List<String> lines) {
         int len = lines.size();
-        System.out.println(ANSI_RED + "[CONFIG LOADER]: Missing " + len + " fields in config: " + lines.toString() + ANSI_RESET);
+        System.out.println(ANSI_RED + "[CONFIG LOADER] Missing " + len + " fields in config: " + lines.toString() + ANSI_RESET);
     }
 
     public int getColumnCount() {

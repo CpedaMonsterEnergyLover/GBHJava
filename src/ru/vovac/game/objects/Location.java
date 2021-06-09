@@ -1,6 +1,8 @@
 package ru.vovac.game.objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ru.vovac.game.objects.classes.GameObject;
+import ru.vovac.game.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,96 +10,73 @@ import java.util.List;
 import java.util.Map;
 
 public class Location extends GameObject {
-    private int cardID;
+    private int locationID;
     private String stringID;
     private String title;
     private int rarity;
     private String description;
-    private Map<String, Double> resourceDrops = new HashMap<>();
+    private List<Integer> resourceDrops = new ArrayList<>();
+    @JsonIgnore
     private List<Hero> heroes = new ArrayList<>();
+    @JsonIgnore
     private List<Creature> creatures = new ArrayList<>();
     //private List<String> localizedFields;
 
     public Location(int cardID, String stringID, String title, int rarity, String description) {
-        this.cardID = cardID;
+        this.locationID = cardID;
         this.stringID = stringID;
         this.title = title;
         this.rarity = rarity;
         this.description = description;
     }
 
-    public Location newGameObject() {
-        return new Location(this.cardID, this.stringID, this.title, this.rarity, this.description);
+    //Deserialization constructor
+    public Location(String json) {
+        this.locationID = Integer.parseInt(Utils.getSubstringValue(json, "floorID"));
+        this.stringID = Utils.getSubstringValue(json, "stringID");
+        this.rarity = Integer.parseInt(Utils.getSubstringValue(json, "rarity"));
+        String resourceDropsString = Utils.getSubstringValue(json, "resourceDrops");
+        this.resourceDrops = Utils.integerListFromString(resourceDropsString);
+        this.addLocalizableField("title");
+        this.addLocalizableField("description");
     }
 
-    public int getCardID() {
-        return cardID;
-    }
-
-    public void setCardID(int cardID) {
-        this.cardID = cardID;
+    public int getLocationID() {
+        return locationID;
     }
 
     public String getStringID() {
         return stringID;
     }
 
-    public void setStringID(String stringID) {
-        this.stringID = stringID;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public int getRarity() {
         return rarity;
     }
 
-    public void setRarity(int rarity) {
-        this.rarity = rarity;
-    }
-
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public List<Integer> getResourceDrops() {
+        return resourceDrops;
     }
 
     public List<Hero> getHeroes() {
         return heroes;
     }
 
-    public void setHeroes(List<Hero> heroes) {
-        this.heroes = heroes;
-    }
-
     public List<Creature> getCreatures() {
         return creatures;
-    }
-
-    public void setCreatures(List<Creature> creatures) {
-        this.creatures = creatures;
-    }
-
-    public Map<String, Double> getResourceDrops() {
-        return resourceDrops;
-    }
-
-    public void setResourceDrops(Map<String, Double> resourceDrops) {
-        this.resourceDrops = resourceDrops;
     }
 
     @Override
     public String toString() {
         return "Card{" +
-                "cardID=" + cardID +
+                "cardID=" + locationID +
                 ", stringID='" + stringID + '\'' +
                 ", title='" + title + '\'' +
                 ", rarity=" + rarity +

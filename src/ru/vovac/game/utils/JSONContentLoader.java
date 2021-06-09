@@ -1,43 +1,51 @@
 package ru.vovac.game.utils;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.MapType;
+import ru.vovac.game.objects.classes.LocalizableObject;
 
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.Map;
 
-import static ru.vovac.game.utils.ContentLocalizer.initLocalDirs;
+import static ru.vovac.game.utils.ContentLocalizator.initLocalDirs;
 
-public class JSONContentLoader <T> {
+public class JSONContentLoader <T extends LocalizableObject> {
     public static final String ANSI_RED = "\u001B[31m";
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_GREEN = "\u001B[32m";
     private Path path;
+    private Class tClass;
 
-    public JSONContentLoader(String path, Class<T> type) {
+    public JSONContentLoader(String path, Class<T> tclass) {
         this.path = Path.of(path);
+        this.tClass = tclass;
     }
 
     public HashMap<Integer, T> loadContent() {
         long ms = System.currentTimeMillis();
-        Gson gson = new Gson();
+        ObjectMapper mapper = new ObjectMapper();
         String json;
         try {
             json = new String(Files.readAllBytes(Paths.get("json/", path.toString())));
-            Type typeOfResourceHandler = new TypeToken<HashMap<Integer, T>>() { }.getType();
-            HashMap<Integer, T> loaded = gson.fromJson(json, typeOfResourceHandler);
-            // Вот здесь loaded должен передаваться в функцию, котора смотрит на все его элементы и создает
-            // Нужные файлы в папке lang/NN/objects
+            // If no objects has been added yet
+            if (json.length() == 0) {
+                return new HashMap<>();
+            }
+            MapType mapType = mapper.getTypeFactory().constructMapType(Map.class, Integer.class, tClass);
+            HashMap<Integer, T> loaded = mapper.readValue(json, mapType);
             if (loaded != null) printLoadingDoneIn(path.toString(), ms, loaded.size());
             else loaded = new HashMap<>();
-            if (loaded.size() > 0) initLocalDirs(path.toString());
-            return loaded;
+            // LOCALIZATION
+            ContentLocalizator<T> contentLocalizator = new ContentLocalizator<>(loaded, path);
+            HashMap<Integer, T> updated = contentLocalizator.localizeCollection();
+            return updated;
         } catch (IOException e) {
             printLoadingException(path.toString(), e);
+            e.printStackTrace();
             return new HashMap<>();
         }
     }

@@ -1,5 +1,7 @@
 package ru.vovac.game.objects.classes;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public class GameObject extends LocalizableObject {
     private static int idCounter = 0;
     private final int objectID = ++idCounter;
@@ -14,4 +16,5 @@ public class GameObject extends LocalizableObject {
                 "id=" + objectID +
                 '}';
     }
+
 }

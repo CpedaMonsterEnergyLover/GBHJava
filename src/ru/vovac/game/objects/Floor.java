@@ -1,23 +1,39 @@
 package ru.vovac.game.objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jdk.jshell.execution.Util;
+import ru.vovac.game.objects.classes.LocalizableObject;
+import ru.vovac.game.utils.Utils;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import static main.java.CollectionLoader.locationCollection;
 
-public class Floor {
+public class Floor extends LocalizableObject {
     private int floorID;
     private String stringID;
     private String title;
     private String description;
     private List<Integer> allLocations;
+    @JsonIgnore
     private List<Integer> commonLocations = new ArrayList<>();
+    @JsonIgnore
     private List<Integer> rareLocations = new ArrayList<>();
+    @JsonIgnore
     private List<Integer> epicLocations = new ArrayList<>();
+    @JsonIgnore
     private List<Integer> storyLocations = new ArrayList<>();
-    //private List<String> localizedFields;
 
-    public Floor() { }
+    //Deserialization constructor
+    public Floor(String json) {
+        this.floorID = Integer.parseInt(Utils.getSubstringValue(json, "floorID"));
+        this.stringID = Utils.getSubstringValue(json, "stringID");
+        String allLocationsString = Utils.getSubstringValue(json, "allLocations");
+        this.allLocations = Utils.integerListFromString(allLocationsString);
+        this.addLocalizableField("title");
+        this.addLocalizableField("description");
+    }
 
     public void sortRarities() {
         if (allLocations == null) return;
@@ -34,6 +50,43 @@ public class Floor {
             if (rarity == 1)
                 commonLocations.add(i);
         }
+    }
+
+
+    public int getFloorID() {
+        return floorID;
+    }
+
+    public String getStringID() {
+        return stringID;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public List<Integer> getAllLocations() {
+        return allLocations;
+    }
+
+    public List<Integer> getCommonLocations() {
+        return commonLocations;
+    }
+
+    public List<Integer> getRareLocations() {
+        return rareLocations;
+    }
+
+    public List<Integer> getEpicLocations() {
+        return epicLocations;
+    }
+
+    public List<Integer> getStoryLocations() {
+        return storyLocations;
     }
 
     @Override

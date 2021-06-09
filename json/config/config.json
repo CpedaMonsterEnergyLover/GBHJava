@@ -1,5 +1,5 @@
 {
-  "CURRENT_LANG": "RU",
+  "CURRENT_LANG": "EN",
   "AVAILABLE_LANGUAGES": ["RU","EN"],
   "JSON_CREATURES": "creatures.json",
   "JSON_EVENTS": "events.json",

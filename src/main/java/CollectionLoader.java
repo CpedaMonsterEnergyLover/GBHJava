@@ -17,19 +17,21 @@ public class CollectionLoader {
 
 
     public static void loadAll() {
-        JSONContentLoader<Location> locationJSONContentLoader = new JSONContentLoader<>(Config.JSON_LOCATIONS(), Location.class);
         JSONContentLoader<Event> eventJSONContentLoader = new JSONContentLoader<>(Config.JSON_EVENTS(), Event.class);
+        eventCollection = eventJSONContentLoader.loadContent();
+        JSONContentLoader<Enfilade> enfiladeJSONContentLoader = new JSONContentLoader<>(Config.JSON_ENFILADES(), Enfilade.class);
+        enfiladeCollection = enfiladeJSONContentLoader.loadContent();
+        JSONContentLoader<Location> locationJSONContentLoader = new JSONContentLoader<>(Config.JSON_LOCATIONS(), Location.class);
+        locationCollection = locationJSONContentLoader.loadContent();
+        JSONContentLoader<Floor> floorJSONContentLoader= new JSONContentLoader<>(Config.JSON_FLOORS(), Floor.class);
+        floorCollection = floorJSONContentLoader.loadContent();
         JSONContentLoader<Resource> resourceJSONContentLoader = new JSONContentLoader<>(Config.JSON_RESOURCES(), Resource.class);
+        resourceCollection = resourceJSONContentLoader.loadContent();
+        /*
         JSONContentLoader<Creature> creatureJSONContentLoader = new JSONContentLoader<>(Config.JSON_CREATURES(), Creature.class);
         JSONContentLoader<Hero> heroJSONContentLoader = new JSONContentLoader<>(Config.JSON_HEROES(), Hero.class);
-        JSONContentLoader<Floor> floorJSONContentLoader= new JSONContentLoader<>(Config.JSON_FLOORS(), Floor.class);
-        JSONContentLoader<Enfilade> enfiladeJSONContentLoader = new JSONContentLoader<>(Config.JSON_ENFILADES(), Enfilade.class);
-        locationCollection = locationJSONContentLoader.loadContent();
         creatureCollection = creatureJSONContentLoader.loadContent();
-        eventCollection = eventJSONContentLoader.loadContent();
-        resourceCollection = resourceJSONContentLoader.loadContent();
         heroCollection = heroJSONContentLoader.loadContent();
-        floorCollection = floorJSONContentLoader.loadContent();
-        enfiladeCollection = enfiladeJSONContentLoader.loadContent();
+        */
     }
 }

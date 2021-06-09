@@ -6,4 +6,6 @@ import java.util.List;
 
 public class Creature extends EntityObject {
     //private List<String> localizedFields;
+
+
 }

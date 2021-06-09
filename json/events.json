@@ -1,8 +1,4 @@
 {
-  "1":{
-    "stringID": "event_test"
-  },
-  "2": {
-
-  }
+  "6": "eventID:6;stringID:test_event;rarity:1",
+  "12": "eventID:1;stringID:test_event2;rarity:2"
 }

@@ -1,37 +1,47 @@
 package ru.vovac.game.objects;
 
 import ru.vovac.game.objects.classes.GameObject;
-
-import java.util.List;
+import ru.vovac.game.utils.Utils;
 
 public class Event extends GameObject {
-    private int cardID;
+    private int eventID;
     private String stringID;
-    private String title;
     private int rarity;
-    private String description;
-    //private List<String> localizedFields;
 
     public Event(int cardID, String stringID, String title, int rarity, String description) {
-        this.cardID = cardID;
         this.stringID = stringID;
-        this.title = title;
         this.rarity = rarity;
-        this.description = description;
     }
 
-    public Event newGameObject() {
-        return new Event(this.cardID, this.stringID, this.title, this.rarity, this.description);
+    // Deserialization constructor
+    public Event(String json) {
+        this.eventID = Integer.parseInt(Utils.getSubstringValue(json, "eventID"));
+        this.stringID = Utils.getSubstringValue(json, "stringID");
+        this.rarity = Integer.parseInt(Utils.getSubstringValue(json, "rarity"));
+        this.addLocalizableField("title");
+        this.addLocalizableField("description");
+    }
+
+    public String getStringID() {
+        return stringID;
+    }
+
+    public int getEventID() {
+        return eventID;
+    }
+
+    public int getRarity() {
+        return rarity;
     }
 
     @Override
     public String toString() {
         return "Event{" +
-                "cardID=" + cardID +
+                "eventID=" + eventID +
                 ", stringID='" + stringID + '\'' +
-                ", title='" + title + '\'' +
                 ", rarity=" + rarity +
-                ", description='" + description + '\'' +
+                ", title=" + getLocalizableField("title") +
+                ", description=" + getLocalizableField("description") +
                 '}';
     }
 }

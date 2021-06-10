@@ -1,1 +1,10 @@
-{"6":{"title":"тестовое событие номер 1","description":"это событие было сделано чтобы тестить программу"},"12":{"title":"тестовое событие номер 3","description":"всмысле номер 3 если номер 2"}}
+{
+  "6" : {
+    "description" : "unlocalized",
+    "title" : "unlocalized"
+  },
+  "12" : {
+    "description" : "unlocalized",
+    "title" : "unlocalized"
+  }
+}

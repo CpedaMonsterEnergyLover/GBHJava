@@ -13,8 +13,6 @@ import static main.java.CollectionLoader.locationCollection;
 public class Floor extends LocalizableObject {
     private int floorID;
     private String stringID;
-    private String title;
-    private String description;
     private List<Integer> allLocations;
     @JsonIgnore
     private List<Integer> commonLocations = new ArrayList<>();
@@ -61,14 +59,6 @@ public class Floor extends LocalizableObject {
         return stringID;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
     public List<Integer> getAllLocations() {
         return allLocations;
     }
@@ -94,8 +84,8 @@ public class Floor extends LocalizableObject {
         return "Floor{" +
                 "floorID=" + floorID +
                 ", stringID='" + stringID + '\'' +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
+                ", title=" + getLocalizableField("title") +
+                ", description=" + getLocalizableField("description") +
                 ", allLocations=" + allLocations +
                 ", commonLocations=" + commonLocations +
                 ", rareLocations=" + rareLocations +

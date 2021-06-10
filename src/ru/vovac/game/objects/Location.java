@@ -5,38 +5,30 @@ import ru.vovac.game.objects.classes.GameObject;
 import ru.vovac.game.utils.Utils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Location extends GameObject {
     private int locationID;
     private String stringID;
-    private String title;
     private int rarity;
-    private String description;
-    private List<Integer> resourceDrops = new ArrayList<>();
+    private List<String> resourceDrops;
+    private int containsEvent;
+    private List<Integer> monsters;
     @JsonIgnore
     private List<Hero> heroes = new ArrayList<>();
     @JsonIgnore
     private List<Creature> creatures = new ArrayList<>();
-    //private List<String> localizedFields;
-
-    public Location(int cardID, String stringID, String title, int rarity, String description) {
-        this.locationID = cardID;
-        this.stringID = stringID;
-        this.title = title;
-        this.rarity = rarity;
-        this.description = description;
-    }
 
     //Deserialization constructor
     public Location(String json) {
-        this.locationID = Integer.parseInt(Utils.getSubstringValue(json, "floorID"));
+        this.locationID = Integer.parseInt(Utils.getSubstringValue(json, "locationID"));
         this.stringID = Utils.getSubstringValue(json, "stringID");
         this.rarity = Integer.parseInt(Utils.getSubstringValue(json, "rarity"));
         String resourceDropsString = Utils.getSubstringValue(json, "resourceDrops");
-        this.resourceDrops = Utils.integerListFromString(resourceDropsString);
+        this.resourceDrops = Utils.stringListFromString(resourceDropsString);
+        this.containsEvent = Integer.parseInt(Utils.getSubstringValue(json, "containsEvent"));
+        String monstersString = Utils.getSubstringValue(json, "monsters");
+        this.monsters = Utils.integerListFromString(monstersString);
         this.addLocalizableField("title");
         this.addLocalizableField("description");
     }
@@ -49,19 +41,11 @@ public class Location extends GameObject {
         return stringID;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
     public int getRarity() {
         return rarity;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public List<Integer> getResourceDrops() {
+    public List<String> getResourceDrops() {
         return resourceDrops;
     }
 
@@ -78,12 +62,14 @@ public class Location extends GameObject {
         return "Card{" +
                 "cardID=" + locationID +
                 ", stringID='" + stringID + '\'' +
-                ", title='" + title + '\'' +
                 ", rarity=" + rarity +
-                ", description='" + description + '\'' +
                 ", resourceDrops=" + resourceDrops +
                 ", heroes=" + heroes +
                 ", creatures=" + creatures +
+                ", containsEvent=" + containsEvent +
+                ", monsters=" + monsters +
+                ", title=" + getLocalizableField("title") +
+                ", description=" + getLocalizableField("description") +
                 '}';
     }
 }

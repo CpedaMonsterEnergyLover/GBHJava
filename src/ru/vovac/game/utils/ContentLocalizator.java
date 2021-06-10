@@ -1,7 +1,9 @@
 package ru.vovac.game.utils;
 
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.type.MapType;
 import ru.vovac.game.config.Config;
 import ru.vovac.game.objects.classes.LocalizableObject;
@@ -84,14 +86,15 @@ public class ContentLocalizator<T extends LocalizableObject> {
                 if (!collectionLocalization.containsKey(key)) {
                     // put in there new Json node
                     collectionLocalization.put(key, localizedFieldsNode);
-                    System.out.println("[LOCALIZATION SUPPLY] Added new item [" + key + "] into the " + s + "/" + path);
+                    System.out.println("[LOCALIZATION SUPPLY] [" + s + "/" + path + "] Added new item with id " + key);
                 }
             }
             // Write new collection into file
             ObjectMapper mapper = new ObjectMapper();
+            ObjectWriter writer = mapper.writer(new DefaultPrettyPrinter());
             try {
                 Path finalPath = Path.of(langsPath.toString(), s, objectsPath.toString(), path.toString());
-                mapper.writeValue(finalPath.toFile(), collectionLocalization);
+                writer.writeValue(finalPath.toFile(), collectionLocalization);
             } catch (IOException e) {
                 e.printStackTrace();
             }

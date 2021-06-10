@@ -8,8 +8,6 @@ import java.util.List;
 public class Enfilade extends LocalizableObject {
     private int enfiladeID;
     private String stringID;
-    private String title;
-    private String description;
     private List<Integer> floors;
 
     //Deserialization constructor
@@ -22,13 +20,26 @@ public class Enfilade extends LocalizableObject {
         this.addLocalizableField("description");
     }
 
+
+    public int getEnfiladeID() {
+        return enfiladeID;
+    }
+
+    public String getStringID() {
+        return stringID;
+    }
+
+    public List<Integer> getFloors() {
+        return floors;
+    }
+
     @Override
     public String toString() {
         return "Enfilade{" +
                 "enfiladeID=" + enfiladeID +
                 ", stringID='" + stringID + '\'' +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
+                ", title=" + getLocalizableField("title") +
+                ", description=" + getLocalizableField("description") +
                 ", floors=" + floors +
                 '}';
     }

@@ -13,6 +13,12 @@ public class Utils {
                 .collect(Collectors.toList());
     }
 
+    public static List<String> stringListFromString(String s) {
+        return Stream.of(s.split(","))
+                .map(String::trim)
+                .collect(Collectors.toList());
+    }
+
     public static String getSubstringValue(String m, String s) {
         m = m.replaceAll("\\s", "");
         String[] values = m.split(";");

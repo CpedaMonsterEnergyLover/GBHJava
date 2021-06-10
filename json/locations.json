@@ -1,3 +1,17 @@
 {
-  "1": "floorID: 1; resourceDrops: 1,2,3,4,5; rarity: 1; stringID: test_location"
+  "1": "locationID: 1; stringID: portal_in; rarity: 0; resourceDrops: 0; containsEvent: 0; monsters: 0",
+  "2": "locationID: 2; stringID: portal_out; rarity: 0; resourceDrops: 0; containsEvent: 0; monsters: 0",
+  "3": "locationID: 3; stringID: sign_in_the_woods; rarity: 0; resourceDrops: 0; containsEvent: 0; monsters: 0",
+  "4": "locationID: 4; stringID: road_to_the_castle; rarity: 0; resourceDrops: 100%4; containsEvent: 0; monsters: 0",
+  "5": "locationID: 5; stringID: forest; rarity: 1; resourceDrops: 50%1; containsEvent: 0; monsters: 0",
+  "6": "locationID: 6; stringID: glade; rarity: 1; resourceDrops: 50%1; containsEvent: 0; monsters: 0",
+  "7": "locationID: 7; stringID: dark_glade; rarity: 2; resourceDrops: 50%1,100%3; containsEvent: 0; monsters: 0",
+  "8": "locationID: 8; stringID: giant_rock; rarity: 2; resourceDrops: 100%2; containsEvent: 0; monsters: 0",
+  "9": "locationID: 9; stringID: mysterious_tree; rarity: 2; resourceDrops: 50%1,50%3,100%5; containsEvent: 0; monsters: 0",
+  "10": "locationID: 10; stringID: trail_in_the_woods; rarity: 2; resourceDrops: 0; containsEvent: 0; monsters: 0",
+  "11": "locationID: 11; stringID: mountain_creek; rarity: 2; resourceDrops: 50%2; containsEvent: 0; monsters: 0",
+  "12": "locationID: 12; stringID: bears_cleft; rarity: 0; resourceDrops: 0; containsEvent: 0; monsters: 0",
+  "13": "locationID: 13; stringID: cut_forest; rarity: 2; resourceDrops: 100%1; containsEvent: 0; monsters: 0",
+  "14": "locationID: 14; stringID: lumberhouse; rarity: 3; resourceDrops: 0; containsEvent: 0; monsters: 0",
+  "15": "locationID: 15; stringID: lair_of_thugs; rarity: 3; resourceDrops: 0; containsEvent: 0; monsters: 0"
 }

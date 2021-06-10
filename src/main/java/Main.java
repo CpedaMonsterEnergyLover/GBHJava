@@ -20,15 +20,5 @@ public class Main {
     public static void main(String[] args) {
         Config.load();
         CollectionLoader.loadAll();
-        System.out.println(eventCollection);
-
-        //System.out.println(locationCollection.size());
-        //ContentLocalizator<Location> jsonContentLoader = new ContentLocalizator<>();
-        //jsonContentLoader.localizeCollection(locationCollection, Path.of(Config.JSON_LOCATIONS()));
-        //List<String> list = Arrays.asList("field1", "field2");
-        //System.out.println(ContentLocalizator.createLocalizationNode(list));
-        //HashMap<Integer, JsonNode> map = jsonContentLoader.getCollectionLocalization(Path.of(Config.JSON_LOCATIONS()), LangsEnum.EN);
-        //System.out.println(map.get(1).get("abc"));
-        //System.out.println(eventCollection);
     }
 }

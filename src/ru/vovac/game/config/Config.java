@@ -40,6 +40,13 @@ public class Config {
     private String JSON_RESOURCES = "";
     @JsonProperty("JSON_ENFILADES")
     private String JSON_ENFILADES = "";
+    @JsonProperty("JSON_PROCS")
+    private String JSON_PROCS = "";
+    @JsonProperty("JSON_DICE")
+    private String JSON_DICE = "";
+    @JsonProperty("JSON_COMBOS")
+    private String JSON_COMBOS = "";
+
 
     public static void load(){
         ObjectMapper objectMapper = new ObjectMapper();
@@ -91,6 +98,12 @@ public class Config {
     public static String JSON_ENFILADES() {
         return instance.JSON_ENFILADES;
     }
+
+    public static String JSON_PROCS() { return instance.JSON_PROCS; }
+
+    public static String JSON_DICE() { return instance.JSON_DICE; }
+
+    public static String JSON_COMBOS() { return instance.JSON_COMBOS; }
 
     public static List<String> AVAILABLE_LANGUAGES() {
         return instance.AVAILABLE_LANGUAGES;

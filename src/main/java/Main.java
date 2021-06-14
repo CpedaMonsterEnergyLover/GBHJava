@@ -20,5 +20,8 @@ public class Main {
     public static void main(String[] args) {
         Config.load();
         CollectionLoader.loadAll();
+        System.out.println(diceCollection);
+        System.out.println(comboCollection);
+        System.out.println(procCollection);
     }
 }

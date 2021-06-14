@@ -1,9 +1,13 @@
 {
   "6" : {
-    "description" : "unlocalized",
-    "title" : "unlocalized"
+    "description" : "карта карта карта",
+    "title" : "тайтл тайтл тайтл"
   },
   "12" : {
+    "description" : "новая карта",
+    "title" : "ого карта"
+  },
+  "13" : {
     "description" : "unlocalized",
     "title" : "unlocalized"
   }

@@ -7,13 +7,15 @@ import ru.vovac.game.utils.JSONContentLoader;
 import java.util.HashMap;
 
 public class CollectionLoader {
-    public static HashMap<Integer, Location> locationCollection;
-    public static HashMap<Integer, Creature> creatureCollection;
-    public static HashMap<Integer, Event> eventCollection;
-    public static HashMap<Integer, Hero> heroCollection;
-    public static HashMap<Integer, Resource> resourceCollection;
-    public static HashMap<Integer, Floor> floorCollection;
-    public static HashMap<Integer, Enfilade> enfiladeCollection;
+    public static HashMap<Integer, Location> locationCollection = null;
+    public static HashMap<Integer, Creature> creatureCollection = null;
+    public static HashMap<Integer, Event> eventCollection = null;
+    public static HashMap<Integer, Resource> resourceCollection = null;
+    public static HashMap<Integer, Floor> floorCollection = null;
+    public static HashMap<Integer, Enfilade> enfiladeCollection = null;
+    public static HashMap<Integer, Dice> diceCollection = null;
+    public static HashMap<Integer, Combo> comboCollection = null;
+    public static HashMap<Integer, Proc> procCollection = null;
 
 
     public static void loadAll() {
@@ -27,11 +29,14 @@ public class CollectionLoader {
         floorCollection = floorJSONContentLoader.loadContent();
         JSONContentLoader<Resource> resourceJSONContentLoader = new JSONContentLoader<>(Config.JSON_RESOURCES(), Resource.class);
         resourceCollection = resourceJSONContentLoader.loadContent();
-        /*
         JSONContentLoader<Creature> creatureJSONContentLoader = new JSONContentLoader<>(Config.JSON_CREATURES(), Creature.class);
-        JSONContentLoader<Hero> heroJSONContentLoader = new JSONContentLoader<>(Config.JSON_HEROES(), Hero.class);
         creatureCollection = creatureJSONContentLoader.loadContent();
-        heroCollection = heroJSONContentLoader.loadContent();
-        */
+
+        JSONContentLoader<Dice> diceJSONContentLoader = new JSONContentLoader<>(Config.JSON_DICE(), Dice.class);
+        diceCollection = diceJSONContentLoader.loadContent();
+        JSONContentLoader<Combo> comboJSONContentLoader = new JSONContentLoader<>(Config.JSON_COMBOS(), Combo.class);
+        comboCollection = comboJSONContentLoader.loadContent();
+        JSONContentLoader<Proc> procJSONContentLoader = new JSONContentLoader<>(Config.JSON_PROCS(), Proc.class);
+        procCollection = procJSONContentLoader.loadContent();
     }
 }

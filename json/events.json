@@ -1,4 +1,5 @@
 {
   "6": "eventID:6;stringID:test_event;rarity:1",
-  "12": "eventID:1;stringID:test_event2;rarity:2"
+  "12": "eventID:1;stringID:test_event2;rarity:2",
+  "13": "eventID:13;stringID:test_event13;rarity:2"
 }

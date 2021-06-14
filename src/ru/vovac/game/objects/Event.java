@@ -1,6 +1,6 @@
 package ru.vovac.game.objects;
 
-import ru.vovac.game.objects.classes.GameObject;
+import ru.vovac.game.classes.GameObject;
 import ru.vovac.game.utils.Utils;
 
 public class Event extends GameObject {

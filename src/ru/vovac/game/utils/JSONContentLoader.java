@@ -2,7 +2,7 @@ package ru.vovac.game.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.MapType;
-import ru.vovac.game.objects.classes.LocalizableObject;
+import ru.vovac.game.classes.LocalizableObject;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,8 +10,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
-
-import static ru.vovac.game.utils.ContentLocalizator.initLocalDirs;
 
 public class JSONContentLoader <T extends LocalizableObject> {
     public static final String ANSI_RED = "\u001B[31m";

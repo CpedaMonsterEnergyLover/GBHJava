@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="org.jmonkeyengine:jme3-core:3.4.0-stable" type="repository">
+    <properties maven-id="org.jmonkeyengine:jme3-core:3.4.0-stable" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jmonkeyengine/jme3-core/3.4.0-stable/jme3-core-3.4.0-stable.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

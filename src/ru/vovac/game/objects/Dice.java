@@ -1,6 +1,6 @@
 package ru.vovac.game.objects;
 
-import ru.vovac.game.objects.classes.LocalizableObject;
+import ru.vovac.game.classes.LocalizableObject;
 import ru.vovac.game.utils.Utils;
 
 import java.util.HashMap;
@@ -11,6 +11,7 @@ public class Dice extends LocalizableObject {
     private String stringID;
     private int level;
     private HashMap<String, List<Integer>> energyMatrix;
+    private List<Integer> diceLevels;
     private int comboID;
     private int procID;
 
@@ -20,6 +21,8 @@ public class Dice extends LocalizableObject {
         this.stringID = Utils.getSubstringValue(json, "stringID");
         String energyMatrixString = Utils.getSubstringValue(json,"energyMatrix");
         this.energyMatrix = Utils.MapStringListIntegerFromString(energyMatrixString);
+        String listOfDiceLevels = Utils.getSubstringValue(json, "diceLevels");
+        this.diceLevels = Utils.integerListFromString(listOfDiceLevels);
         this.level = Integer.parseInt(Utils.getSubstringValue(json, "level"));
         this.comboID = Integer.parseInt(Utils.getSubstringValue(json, "comboID"));
         this.procID = Integer.parseInt(Utils.getSubstringValue(json, "procID"));

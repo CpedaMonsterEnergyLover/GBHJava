@@ -46,6 +46,10 @@ public class Config {
     private String JSON_DICE = "";
     @JsonProperty("JSON_COMBOS")
     private String JSON_COMBOS = "";
+    @JsonProperty("JSON_ABILITIES")
+    private String JSON_ABILITIES = "";
+    @JsonProperty("JSON_EQUIPMENT")
+    private String JSON_EQUIPMENT = "";
 
 
     public static void load(){
@@ -104,6 +108,10 @@ public class Config {
     public static String JSON_DICE() { return instance.JSON_DICE; }
 
     public static String JSON_COMBOS() { return instance.JSON_COMBOS; }
+
+    public static String JSON_ABILITIES() { return instance.JSON_ABILITIES; }
+
+    public static String JSON_EQUIPMENT() { return instance.JSON_EQUIPMENT; }
 
     public static List<String> AVAILABLE_LANGUAGES() {
         return instance.AVAILABLE_LANGUAGES;

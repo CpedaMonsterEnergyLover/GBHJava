@@ -16,6 +16,9 @@ public class CollectionLoader {
     public static HashMap<Integer, Dice> diceCollection = null;
     public static HashMap<Integer, Combo> comboCollection = null;
     public static HashMap<Integer, Proc> procCollection = null;
+    public static HashMap<Integer, Hero> heroCollection = null;
+    public static HashMap<Integer, Ability> abilityCollection = null;
+    public static HashMap<Integer, Equipment> equipmentCollection = null;
 
 
     public static void loadAll() {
@@ -31,12 +34,17 @@ public class CollectionLoader {
         resourceCollection = resourceJSONContentLoader.loadContent();
         JSONContentLoader<Creature> creatureJSONContentLoader = new JSONContentLoader<>(Config.JSON_CREATURES(), Creature.class);
         creatureCollection = creatureJSONContentLoader.loadContent();
-
         JSONContentLoader<Dice> diceJSONContentLoader = new JSONContentLoader<>(Config.JSON_DICE(), Dice.class);
         diceCollection = diceJSONContentLoader.loadContent();
         JSONContentLoader<Combo> comboJSONContentLoader = new JSONContentLoader<>(Config.JSON_COMBOS(), Combo.class);
         comboCollection = comboJSONContentLoader.loadContent();
         JSONContentLoader<Proc> procJSONContentLoader = new JSONContentLoader<>(Config.JSON_PROCS(), Proc.class);
         procCollection = procJSONContentLoader.loadContent();
+        JSONContentLoader<Hero> heroJSONContentLoader = new JSONContentLoader<>(Config.JSON_HEROES(), Hero.class);
+        heroCollection = heroJSONContentLoader.loadContent();
+        JSONContentLoader<Ability> abilityJSONContentLoader = new JSONContentLoader<>(Config.JSON_ABILITIES(), Ability.class);
+        abilityCollection = abilityJSONContentLoader.loadContent();
+        JSONContentLoader<Equipment> equipmentJSONContentLoader = new JSONContentLoader<>(Config.JSON_EQUIPMENT(), Equipment.class);
+        equipmentCollection = equipmentJSONContentLoader.loadContent();
     }
 }

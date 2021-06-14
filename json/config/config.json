@@ -10,5 +10,7 @@
   "JSON_ENFILADES": "enfilades.json",
   "JSON_COMBOS": "combos.json",
   "JSON_PROCS": "procs.json",
-  "JSON_DICE": "dice.json"
+  "JSON_DICE": "dice.json",
+  "JSON_ABILITIES": "abilities.json",
+  "JSON_EQUIPMENT": "equipment.json"
 }

@@ -1,6 +1,6 @@
 package ru.vovac.game.objects;
 
-import ru.vovac.game.objects.classes.LocalizableObject;
+import ru.vovac.game.classes.LocalizableObject;
 import ru.vovac.game.utils.Utils;
 
 import java.util.List;

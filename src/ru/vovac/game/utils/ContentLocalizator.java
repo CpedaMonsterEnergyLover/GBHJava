@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.type.MapType;
 import ru.vovac.game.config.Config;
-import ru.vovac.game.objects.classes.LocalizableObject;
+import ru.vovac.game.classes.LocalizableObject;
 
 import java.io.File;
 import java.io.IOException;

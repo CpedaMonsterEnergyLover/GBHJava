@@ -1,8 +1,7 @@
 package ru.vovac.game.objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jdk.jshell.execution.Util;
-import ru.vovac.game.objects.classes.LocalizableObject;
+import ru.vovac.game.classes.LocalizableObject;
 import ru.vovac.game.utils.Utils;
 
 import java.util.ArrayList;

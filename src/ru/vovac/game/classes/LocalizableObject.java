@@ -1,4 +1,4 @@
-package ru.vovac.game.objects.classes;
+package ru.vovac.game.classes;
 
 import java.util.HashMap;
 
@@ -9,7 +9,7 @@ public class LocalizableObject {
         return localizableFields;
     }
 
-    public void addLocalizableField(String field) {
+    protected void addLocalizableField(String field) {
         this.localizableFields.put(field, "");
     }
 

@@ -1,15 +1,23 @@
 package ru.vovac.game.objects;
 
-import ru.vovac.game.objects.classes.EntityObject;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import ru.vovac.game.classes.EntityObject;
 import ru.vovac.game.utils.Utils;
 
 public class Creature extends EntityObject {
     private int creatureID;
     private String stringID;
     private int attack;
+
+    @JsonIgnore
+    private boolean aggressive;
+    /* From super:
+    private int maxHealth;
     private int defense;
     private int level;
-    private int dice;
+    @JSONIgnore
+    private int currentHealth
+    */
 
     //Deserialization constructor
     public Creature(String json) {
@@ -18,9 +26,8 @@ public class Creature extends EntityObject {
         this.attack = Integer.parseInt(Utils.getSubstringValue(json, "attack"));
         this.defense = Integer.parseInt(Utils.getSubstringValue(json, "defense"));
         this.level = Integer.parseInt(Utils.getSubstringValue(json, "level"));
-        this.dice = Integer.parseInt(Utils.getSubstringValue(json, "dice"));
+        this.maxHealth = Integer.parseInt(Utils.getSubstringValue(json, "maxHealth"));
         this.addLocalizableField("title");
     }
 
-    //TODO getters
 }

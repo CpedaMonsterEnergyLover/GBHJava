@@ -1,43 +1,20 @@
 package main.java;
 
-import com.jme3.app.SimpleApplication;
-import com.jme3.system.AppSettings;
+import org.apache.commons.lang3.ArrayUtils;
+import ru.vovac.application.MainApplication;
 import ru.vovac.game.config.Config;
+import ru.vovac.wrappers.IntegerIntegerHashMapWrapper;
 
-import com.jme3.app.SimpleApplication;
-import com.jme3.material.Material;
-import com.jme3.math.ColorRGBA;
-import com.jme3.scene.Geometry;
-import com.jme3.scene.shape.Box;
-import com.jme3.system.AppSettings;
+import java.sql.SQLOutput;
+import java.util.HashMap;
 
-public class Main extends SimpleApplication {
+import static main.java.CollectionLoader.locationCollection;
+
+
+public class Main {
     public static void main(String[] args) {
-        Main app = new Main();
-
-        AppSettings settings = new AppSettings(true);
-        settings.setTitle("My Awesome Game");
-        app.setSettings(settings);
-
-        app.start();
-    }
-
-    @Override
-    public void simpleInitApp() {
-
-        Box b = new Box(1, 1, 1);
-        Geometry geom = new Geometry("Box", b);
-
-        Material mat = new Material(assetManager, "Common/MatDefs/Misc/Unshaded.j3md");
-        mat.setColor("Color", ColorRGBA.Blue);
-        geom.setMaterial(mat);
-
-        rootNode.attachChild(geom);
-
-    }
-
-    @Override
-    public void simpleUpdate(float tpf) {
-        //TODO: add update code
+        Config.load();
+        CollectionLoader.loadAll();
+        MainApplication.main(new String[]{""});
     }
 }

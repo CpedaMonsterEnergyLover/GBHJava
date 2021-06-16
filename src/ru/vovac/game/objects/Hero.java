@@ -1,13 +1,17 @@
 package ru.vovac.game.objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jme3.export.*;
 import ru.vovac.game.classes.EntityObject;
 import ru.vovac.game.utils.Utils;
+import ru.vovac.wrappers.IntegerArrayWrapper;
+import ru.vovac.wrappers.IntegerIntegerHashMapWrapper;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-public class Hero extends EntityObject {
+public class Hero extends EntityObject implements Savable {
     private int heroID;
     private String stringID;
 
@@ -36,13 +40,43 @@ public class Hero extends EntityObject {
         this.addLocalizableField("description");
     }
 
-    /* From super:
-    private int maxHealth;
-    private int defense;
-    private int level;
-    @JSONIgnore
-    private int currentHealth
-    */
+    @Override
+    public void write(JmeExporter ex) throws IOException {
+        OutputCapsule capsule = ex.getCapsule(this);
+        capsule.write(heroID,"heroID", 1);
+        capsule.write(stringID,"stringID", "");
+        capsule.write(heroType,"heroType", "");
+        capsule.write(armorType,"armorType", "");
+        capsule.write(new IntegerArrayWrapper(availableAbilities) ,"availableAbilities", new IntegerArrayWrapper());
+        capsule.write(new IntegerIntegerHashMapWrapper(equipment),"equipment", new IntegerIntegerHashMapWrapper());
+        capsule.write(new IntegerArrayWrapper(pickedAbilities) ,"pickedAbilities", new IntegerArrayWrapper());
+        capsule.write(maxHealth,"maxHealth", 1);
+        capsule.write(defense,"defense", 1);
+        capsule.write(level,"level", 1);
+        capsule.write(currentHealth,"currentHealth", 1);
+    }
 
+    @Override
+    public void read(JmeImporter im) throws IOException {
+        InputCapsule capsule = im.getCapsule(this);
+        heroID = capsule.readInt("heroID", 1);
+        stringID = capsule.readString("stringID", "");
+        heroType = capsule.readString("heroType", "");
+        armorType = capsule.readString("armorType", "");
+        IntegerArrayWrapper availableAbilitiesUnwrapped = (IntegerArrayWrapper) capsule.readSavable
+                ("availableAbilities", new IntegerArrayWrapper());
+        availableAbilities = availableAbilitiesUnwrapped.unwrap();
+        IntegerIntegerHashMapWrapper equipmentUnwrapped = (IntegerIntegerHashMapWrapper) capsule.readSavable
+                ("equipment", new IntegerIntegerHashMapWrapper());
+        equipment = equipmentUnwrapped.unwrap();
+        IntegerArrayWrapper pickedAbilitiesUnwrapped = (IntegerArrayWrapper) capsule.readSavable
+                ("availableAbilities", new IntegerArrayWrapper());
+        pickedAbilities = pickedAbilitiesUnwrapped.unwrap();
+        maxHealth = capsule.readInt("maxHealth", 1);
+        defense = capsule.readInt("defense", 1);
+        level = capsule.readInt("level", 1);
+        currentHealth = capsule.readInt("keys", 1);
+
+    }
 
 }

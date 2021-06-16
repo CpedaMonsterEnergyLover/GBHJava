@@ -1,10 +1,15 @@
 package ru.vovac.game.objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jme3.export.*;
 import ru.vovac.game.classes.EntityObject;
 import ru.vovac.game.utils.Utils;
+import ru.vovac.wrappers.IntegerArrayWrapper;
+import ru.vovac.wrappers.IntegerIntegerHashMapWrapper;
 
-public class Creature extends EntityObject {
+import java.io.IOException;
+
+public class Creature extends EntityObject implements Savable {
     private int creatureID;
     private String stringID;
     private int attack;
@@ -30,4 +35,29 @@ public class Creature extends EntityObject {
         this.addLocalizableField("title");
     }
 
+    @Override
+    public void write(JmeExporter ex) throws IOException {
+        OutputCapsule capsule = ex.getCapsule(this);
+        capsule.write(creatureID,"creatureID", 1);
+        capsule.write(stringID,"stringID", "");
+        capsule.write(attack,"attack", 1);
+        capsule.write(aggressive,"aggressive", Boolean.TRUE);
+        capsule.write(maxHealth,"maxHealth", 1);
+        capsule.write(defense,"defense", 1);
+        capsule.write(level,"level", 1);
+        capsule.write(currentHealth,"currentHealth", 1);
+    }
+
+    @Override
+    public void read(JmeImporter im) throws IOException {
+        InputCapsule capsule = im.getCapsule(this);
+        creatureID = capsule.readInt("creatureID", 1);
+        stringID = capsule.readString("stringID", "");
+        attack = capsule.readInt("attack", 1);
+        aggressive = capsule.readBoolean("aggressive", Boolean.TRUE);
+        maxHealth = capsule.readInt("maxHealth", 1);
+        defense = capsule.readInt("defense", 1);
+        level = capsule.readInt("level", 1);
+        currentHealth = capsule.readInt("currentHealth", 1);
+    }
 }

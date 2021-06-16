@@ -11,5 +11,6 @@
     <orderEntry type="library" name="org.jmonkeyengine:jme3-desktop:3.4.0-stable" level="project" />
     <orderEntry type="library" name="org.jmonkeyengine:jme3-core:3.4.0-stable" level="project" />
     <orderEntry type="library" name="org.jmonkeyengine:jme3-lwjgl:3.4.0-stable" level="project" />
+    <orderEntry type="library" name="org.apache.commons:commons-lang3:3.12.0" level="project" />
   </component>
 </module>

@@ -13,5 +13,6 @@
   "12": "locationID: 12; stringID: bears_cleft; rarity: 0; resourceDrops: 0; containsEvent: 0; monsters: 0",
   "13": "locationID: 13; stringID: cut_forest; rarity: 2; resourceDrops: 100%1; containsEvent: 0; monsters: 0",
   "14": "locationID: 14; stringID: lumberhouse; rarity: 3; resourceDrops: 0; containsEvent: 0; monsters: 0",
-  "15": "locationID: 15; stringID: lair_of_thugs; rarity: 3; resourceDrops: 0; containsEvent: 0; monsters: 0"
+  "15": "locationID: 15; stringID: lair_of_thugs; rarity: 3; resourceDrops: 0; containsEvent: 0; monsters: 0",
+  "16": "locationID: 16; stringID: safddasfaf; rarity: 5; resourceDrops: 5; containsEvent: 0; monsters: 0"
 }

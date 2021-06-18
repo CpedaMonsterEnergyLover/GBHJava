@@ -10,17 +10,17 @@ import java.util.List;
 import static main.java.CollectionLoader.locationCollection;
 
 public class Floor extends LocalizableObject {
-    private int floorID;
-    private String stringID;
-    private List<Integer> allLocations;
+    private final int floorID;
+    private final String stringID;
+    private final List<Integer> allLocations;
     @JsonIgnore
-    private List<Integer> commonLocations = new ArrayList<>();
+    private final List<Integer> commonLocations = new ArrayList<>();
     @JsonIgnore
-    private List<Integer> rareLocations = new ArrayList<>();
+    private final List<Integer> rareLocations = new ArrayList<>();
     @JsonIgnore
-    private List<Integer> epicLocations = new ArrayList<>();
+    private final List<Integer> epicLocations = new ArrayList<>();
     @JsonIgnore
-    private List<Integer> storyLocations = new ArrayList<>();
+    private final List<Integer> storyLocations = new ArrayList<>();
 
     //Deserialization constructor
     public Floor(String json) {

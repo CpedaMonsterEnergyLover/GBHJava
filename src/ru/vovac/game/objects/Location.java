@@ -82,6 +82,7 @@ public class Location extends GameObject implements Savable{
     @Override
     public String toString() {
         return "Card{" +
+                "objectID=" + objectID +
                 "cardID=" + locationID +
                 ", stringID='" + stringID + '\'' +
                 ", rarity=" + rarity +

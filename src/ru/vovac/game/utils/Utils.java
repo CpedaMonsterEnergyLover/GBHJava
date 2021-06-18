@@ -1,5 +1,7 @@
 package ru.vovac.game.utils;
 
+import com.jme3.math.Vector3f;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -59,5 +61,9 @@ public class Utils {
             }
         }
         return result;
+    }
+
+    public static float ensureRange(float value, float min, float max) {
+        return Math.min(Math.max(value, min), max);
     }
 }

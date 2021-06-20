@@ -2,10 +2,7 @@ package ru.vovac.game.utils;
 
 import com.jme3.math.Vector3f;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -65,5 +62,11 @@ public class Utils {
 
     public static float ensureRange(float value, float min, float max) {
         return Math.min(Math.max(value, min), max);
+    }
+
+    public static int randomDir() {
+        int dir = 0;
+        while (dir == 0) dir = new Random().nextInt(3) - 1;
+        return dir;
     }
 }

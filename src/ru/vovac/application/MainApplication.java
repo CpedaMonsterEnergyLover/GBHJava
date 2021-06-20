@@ -18,10 +18,11 @@ public class MainApplication extends SimpleApplication {
         AppSettings settings = new AppSettings(true);
         settings.setTitle("CardsGame");
         settings.setResolution(1200, 900);
-        settings.setFullscreen(true);
+        settings.setFullscreen(false);
         settings.setResizable(true);
+        settings.setFrameRate(60);
         app.setSettings(settings);
-        app.setShowSettings(true);
+        app.setShowSettings(false);
         app.start();
     }
 

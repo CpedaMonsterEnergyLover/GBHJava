@@ -3,18 +3,15 @@ package ru.vovac.game.scene;
 import com.jme3.asset.AssetManager;
 import com.jme3.light.DirectionalLight;
 import com.jme3.material.Material;
-import com.jme3.material.RenderState;
-import com.jme3.math.ColorRGBA;
 import com.jme3.math.FastMath;
 import com.jme3.math.Vector3f;
-import com.jme3.renderer.queue.RenderQueue;
 import com.jme3.scene.Geometry;
 import com.jme3.scene.Node;
 import com.jme3.scene.Spatial;
 import com.jme3.scene.shape.Box;
 import org.apache.commons.lang3.tuple.MutablePair;
-import org.apache.commons.lang3.tuple.Pair;
 import ru.vovac.application.MainApplication;
+import ru.vovac.game.controllers.RotationController;
 import ru.vovac.game.objects.Floor;
 import ru.vovac.game.objects.Location;
 
@@ -54,12 +51,13 @@ public class GameField {
         fieldPivot = new Node("fieldPivot");
         fieldPivot.move(0, 0, 0);
         // Loads models
+        Material testMaterial = assetManager.loadMaterial("Materials/TestMaterial.j3m");
         Spatial card = assetManager.loadModel("Models/card/card.j3o");
-        card.setMaterial( assetManager.loadMaterial("Materials/TestMaterial.j3m"));
+        card.setMaterial(testMaterial);
         Spatial frame_01 = assetManager.loadModel("Models/cardframe_bricks01/cardframe_bricks01.j3o");
-        frame_01.setMaterial( assetManager.loadMaterial("Materials/TestMaterial.j3m"));
+        frame_01.setMaterial(testMaterial);
         Spatial frame_02 = assetManager.loadModel("Models/cardframe_bricks02/cardframe_bricks02.j3o");
-        frame_02.setMaterial( assetManager.loadMaterial("Materials/TestMaterial.j3m"));
+        frame_02.setMaterial(testMaterial);
         // Creates a list of loaded card frames
         List<Spatial> cardFrameList = new ArrayList<>();
         cardFrameList.add(frame_01);
@@ -86,21 +84,32 @@ public class GameField {
         // For cycle, iterates over each floor cell
         for (int i = 0; i < width ; i++) {
             for (int j = 0; j < height; j++) {
-                // Clones card and sets properties
+                // Clones card model
                 Spatial clonedCard = card.clone();
-                clonedCard.setName("card_" + i + "_" + j);
-                clonedCard.setUserData("x", i);
-                clonedCard.setUserData("y", j);
-                clonedCard.setUserData("opened", false);
+                clonedCard.setName("card");
+                clonedCard.setUserData("hui", "" + i + j);
+
                 // Creates a card pivot
-                Node cardPivot = new Node("cardPivot_" + i + "_" + j);
+                Node cardPivot = new Node("cardPivot");
                 // Chooses random frame spatial from the list
                 Spatial cardFrame = cardFrameList.get(new Random().nextInt(cardFrameList.size())).clone();
-                cardFrame.setName("cardFrame_" + i + "_" + j);
-                // Adds a card and the frame to the pivot
+                cardFrame.setName("frame");
+
+                // Creates a card box for ray picking...
+                Geometry cardBox = new Geometry("cardBox_" + i + "_" + j, new Box(1, 1.5f, 0.001f));
+                cardBox.setCullHint(Spatial.CullHint.Always);
+                cardBox.setMaterial(testMaterial);
+                cardBox.move(0f, 0.23f, 0f);
+                cardBox.rotate(FastMath.DEG_TO_RAD * 90, /*FastMath.DEG_TO_RAD * 180*/ 0f, 0f);
+                cardBox.setUserData("x", i);
+                cardBox.setUserData("y", j);
+
+                // Adds everything to the pivot
+                cardPivot.attachChild(cardBox);
                 cardPivot.attachChild(clonedCard);
                 cardPivot.attachChild(cardFrame);
-                cardPivot.rotate(FastMath.DEG_TO_RAD * 90, FastMath.DEG_TO_RAD * 180, 0.0f);
+                cardPivot.addControl(new RotationController());
+                cardPivot.rotate(FastMath.DEG_TO_RAD * 90, /*FastMath.DEG_TO_RAD * 180*/ 0f, 0f);
                 cardPivot.move((2.0f) * i, (3.0f) * j,0.0f);
                 // Attaches card pivot to the field
                 fieldPivot.attachChild(cardPivot);
@@ -109,6 +118,10 @@ public class GameField {
                 if (storyCoords.containsKey(new MutablePair<>(i, j))) {
                     cardLocation = locationCollection.get(storyCoords.get(new MutablePair<>(i, j)));
                     clonedCard.setUserData("opened", true);
+                    if (cardLocation.getLocationID() == 1) {
+                        cardPivot.rotate(0f, 0f, FastMath.DEG_TO_RAD * 180);
+                        System.out.println("PORTAL");
+                    }
                 } else {
                     int rnd = new Random().nextInt(100);
                     if (rnd > rareOdds + epicOdds) {
@@ -125,13 +138,13 @@ public class GameField {
                                 (floor.getEpicLocations().size()))).newGameObject();
                     }
                 }
-                clonedCard.setUserData("location", cardLocation);
+                cardBox.setUserData("location", cardLocation);
                 //System.out.println(i + ":" + j + " ADDED " + cardLocation.getStringID() + " AS OBJECT " + cardLocation.getObjectID());
             }
         }
 
         rootNode.attachChild(fieldPivot);
-        rootNode.getChild("fieldPivot").move((float) - width / 2, (float) - height / 2, 0f);
+        rootNode.getChild("fieldPivot").move((float) - width + 1, (float) - height * 1.5f + 1.5f, 0f);
         // You must add a directional light to make the model visible!
         setLight();
 
@@ -146,7 +159,7 @@ public class GameField {
         Material mat = assetManager.loadMaterial("Materials/TestMaterial.j3m");
         ghostTable.setCullHint(Spatial.CullHint.Always);
         ghostTable.setMaterial(mat);
-        ghostTable.setLocalTranslation(width + 10, height + 10, -0.1f);
+        ghostTable.setLocalTranslation(width + 10, height + 10, 0.1f);
         fieldPivot.attachChild(ghostTable);
     }
 
